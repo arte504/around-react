@@ -7,28 +7,15 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import EditProfileModal from "./EditProfileModal";
 
 export default function App() {
+  // ===== User ===== //
+  // --- State for fetching user info --- //
   const [currentUser, setCurrentUser] = React.useState({
     name: "",
     about: "",
     avatar: "",
     _id: "",
   });
-  
-  const [cards,setCards] = React.useState([]);
-
-  const [deleteCard, deleteCardSeter] = React.useState({
-    _id: ""
-  })
-
-  React.useEffect(() => {
-    api
-      .getCardList()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.log);
-  }, []);
-
+  // --- User info
   React.useEffect(() => {
     api
       .getUserInfo()
@@ -43,6 +30,22 @@ export default function App() {
       .catch(console.log);
   }, []);
 
+  // ===== Cards ===== //
+  // --- States for fetching cards from the server //
+  const [cards,setCards] = React.useState([]);
+  // --- States for card deleting --- //
+  const [deleteCard, deleteCardSeter] = React.useState({
+    _id: ""
+  })
+  // --- Card list requset from server --- //
+  React.useEffect(() => {
+    api
+      .getCardList()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch(console.log);
+  }, []);
 
   return (
     <div className='page'>
