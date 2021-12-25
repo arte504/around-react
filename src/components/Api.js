@@ -1,15 +1,4 @@
-const fetching = (url, headers) => {
-  return fetch(url, headers)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      Promise.reject(`ERROR: ${res.statusText}`);
-    })
-};
-
-class Api {
+export default class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
@@ -23,7 +12,7 @@ class Api {
   // --- Get card list from the server --- //
   getCardList() {
     return (
-      fetching(`${this._baseUrl}/cards`, {
+      fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
       })
       .then(this._response)
@@ -31,14 +20,14 @@ class Api {
   }
   // --- Get user info from the server --- //
   getUserInfo() {
-    return fetching(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
       })
       .then(this._response)
   }
   // --- Updating/Editing user profile info --- //
   setUserInfo(name, about) {
-    return fetching(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify(
@@ -51,7 +40,7 @@ class Api {
   // --- Adding new card --- //
   addCard(data) {
     console.log(data);
-    return fetching(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify(
@@ -63,7 +52,7 @@ class Api {
   }
   // --- Removing a card --- //
   removeCard(cardId) {
-    return fetching(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE"
     })
@@ -71,7 +60,7 @@ class Api {
   }
   // --- Like a card --- //
   likeCard(cardId) {
-    return fetching(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       headers: this._headers,
       method: "PUT"
     })
@@ -79,7 +68,7 @@ class Api {
   }
   // --- Unlike a card --- //
   unlikeCard(cardId) {
-    return fetching(`${this._baseUrl}/cards/likes/${cardId}` , {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}` , {
       headers: this._headers,
       method: "DELETE"
     })
@@ -87,7 +76,7 @@ class Api {
   }
   // --- Setting user profile avatar --- //
   setUserAvatar(avatar) {
-    return fetching(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify(
@@ -97,10 +86,3 @@ class Api {
     .then(this._response)
   }
 }
-
-const api = new Api("https://around.nomoreparties.co/v1/group-12", {
-    authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-    'Content-Type': 'application/json' 
-  }
-);
-export default api;

@@ -26,8 +26,8 @@ export default function Card ({
 
     const cardDeleteButtonClass = `card__delete-button ${
         isOwner 
-        ? "card__delete-button"
-        : "card__delete-button_hidden"
+        ? 'card__delete-button'
+        : 'card__delete-button_hidden'
     }`;
 
     const isLiked = card.likes.some((user) => 
@@ -35,13 +35,13 @@ export default function Card ({
     )
 
     const cardLikeButtonClass = `card__like-button ${
-        isLiked && "card__like-button_active"
+        isLiked && 'card__like-button_active'
     }`;
 
     return (
-        <li>
+        <li className='card'>
             <img 
-                src="#" 
+                src={card.link} 
                 alt="default" 
                 className='card__image' 
                 onClick={handleClick}
@@ -53,7 +53,7 @@ export default function Card ({
                 onClick={handleDeleteCard}
             ></button>
             <div className='card__text'>
-                <h2 className='card__title'></h2>
+                <h2 className='card__title'>{card.name}</h2>
                 <div className='card__like'>
                     <button 
                     className={cardLikeButtonClass}

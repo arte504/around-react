@@ -2,31 +2,31 @@ import React from 'react';
 import ModalWithForm from './ModalWithForm';
 import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
-export default function EditProfileModal({ isOpend, closeModal,updateUserInfo }){
+export default function EditProfileModal({ isOpend, closeModal, onUpdateUser }){
     const [name, setName] = React.useState("");
-    const [job, setJob] = React.useState("");
+    const [about, setAbout] = React.useState("");
+
+    const currentUser = React.useContext(CurrentUserContext);
 
     function handleNameUpdate(evt) {
         setName(evt.target.value);
     }
 
-    function handleJobUpdate(evt) {
-        setJob(evt.target.value);
+    function handleAboutUpdate(evt) {
+        setAbout(evt.target.value);
     }
-
-    const currentUser = React.useContext(CurrentUserContext);
 
     React.useEffect(() => {
         setName(currentUser.name);
-        setJob(currentUser.about);
+        setAbout(currentUser.about);
     }, [currentUser] );
 
     function submitHandler(evt) {
         evt.preventDefault();
 
-        updateUserInfo({
+        onUpdateUser({
             name,
-            about: job
+            about
         });
     }
 
@@ -47,31 +47,31 @@ export default function EditProfileModal({ isOpend, closeModal,updateUserInfo })
                 placeholder="Name"
                 value={name}
                 onChange={handleNameUpdate}
-                minlength="2"
-                maxlength="40"
+                minLength="2"
+                maxLength="40"
                 required
             />
             <span 
                 id="nameInput_error"
                 className='modal__error modal__span'
-                > 
+            >
             </span>
             <input
                 className='modal__input modal__input_type_subtitle'
                 type="text"
-                id="jobInput" 
-                name="jobInput" 
-                placeholder="Job"
-                value={job}
-                onChange={handleJobUpdate}
-                minlength="2" 
-                maxlength="200" 
+                id="aboutInput" 
+                name="aboutInput" 
+                placeholder="About"
+                value={about}
+                onChange={handleAboutUpdate}
+                minLength="2" 
+                maxLength="200" 
                 required
             />
             <span 
                 id="jobInput_error"
                 className='modal__error modal__span'
-                > 
+            > 
             </span>
         </ModalWithForm>
     );
