@@ -5,6 +5,8 @@ import Content from "./Content";
 import Api from "./Api"
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 import EditProfileModal from "./EditProfileModal";
+import EditAvatarModal from "./EditAvatarModal";
+import AddCardModal from "./AddCardModal"
 
 export default function App() {
   // ===== API ===== //
@@ -21,13 +23,19 @@ export default function App() {
   const api = new Api(apiConfig);
 
   // ===== Modals ===== //
-  const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
-    React.useState(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = React.useState(false);
+
+  const [isEditAvatarModalOpen, setIsEditAvatarModalOpen] = React.useState(false);
+
+  const [isAddCardModalOpen, setIsAddCardModalOpen] = React.useState(false);
   
   function closeAllModals() {
     setIsEditProfileModalOpen(false);
+    setIsEditAvatarModalOpen(false);
+    setIsAddCardModalOpen(false);
   }
-  // ===== User ===== //
+
+  // ===== Profile ===== //
   // --- State for fetching user info --- //
   const [currentUser, setCurrentUser] = React.useState({
     name: "",
@@ -49,11 +57,7 @@ export default function App() {
       })
       .catch(console.log);
   }, []);
-
-  function handleEditProfile() {
-    setIsEditProfileModalOpen(true);
-  }
-
+  // --- Updating profile and avatar handlers --- //
   function handleUpdateUser(newData) {
     api
       .setUserInfo(newData)
@@ -67,6 +71,29 @@ export default function App() {
         closeAllModals();
       })
       .catch(console.log);
+  }
+
+  function handleUpdateAvatar(newData) {
+    api
+      .setUserAvatar(newData)
+      .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          about: res.about,
+          avatar: res.avatar,
+          _id: res._id,
+        });
+        closeAllModals();
+      })
+      .catch(console.log);
+  }
+  // --- Edit profile and avatar buttons handlers --- //
+  function handleEditProfile() {
+    setIsEditProfileModalOpen(true);
+  }
+
+  function handleEditAvatr() {
+    setIsEditAvatarModalOpen(true);
   }
 
   // ===== Cards ===== //
@@ -91,7 +118,10 @@ export default function App() {
       .catch(console.log);
   }, []);
 
-  console.log(cards);
+  function handleAddCard() {
+    setIsAddCardModalOpen(true);
+  }
+
   // ===== DOM ===== //
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -99,8 +129,8 @@ export default function App() {
         <Header/>
         <Content
           onEditProfileClick={handleEditProfile}
-          onAddCardClick
-          onEditAvatarClick
+          onAddCardClick={handleAddCard}
+          onEditAvatarClick={handleEditAvatr}
           onDeleteCardClick
           onCardClick
           onCardLike
@@ -108,11 +138,23 @@ export default function App() {
         />
         <Footer/>
 
-        <section>
+        <section className='modals'>
           <EditProfileModal
-            isOpend={isEditProfileModalOpen}
+            isOpened={isEditProfileModalOpen}
             onClose={closeAllModals}
             onUpdateUser={handleUpdateUser}
+          />
+
+          <EditAvatarModal 
+            isOpened={isEditAvatarModalOpen}
+            onClose={closeAllModals}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
+          <AddCardModal 
+            isOpened={isAddCardModalOpen}
+            onClose={closeAllModals}
+            onUpdateAvatar={handleUpdateAvatar}
           />
         </section>
       </div>

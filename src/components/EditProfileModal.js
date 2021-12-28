@@ -2,7 +2,7 @@ import React from 'react';
 import ModalWithForm from './ModalWithForm';
 import { CurrentUserContext } from '../context/CurrentUserContext.js'
 
-export default function EditProfileModal({ isOpend, closeModal, onUpdateUser }){
+export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
     const [name, setName] = React.useState("");
     const [about, setAbout] = React.useState("");
 
@@ -35,12 +35,12 @@ export default function EditProfileModal({ isOpend, closeModal, onUpdateUser }){
             name="profile"
             title="Edit profile"
             buttonText="Save"
-            isOpend={isOpend}
-            closeModal={closeModal}
+            isOpened={isOpened}
+            onClose={onClose}
             onSubmit={submitHandler}
         >
             <input 
-                className='modal__input modal__input_type_title' 
+                className='modal__input' 
                 type="text"
                 id="nameInput"
                 name="nameInput"
@@ -57,7 +57,7 @@ export default function EditProfileModal({ isOpend, closeModal, onUpdateUser }){
             >
             </span>
             <input
-                className='modal__input modal__input_type_subtitle'
+                className='modal__input'
                 type="text"
                 id="aboutInput" 
                 name="aboutInput" 
@@ -69,7 +69,7 @@ export default function EditProfileModal({ isOpend, closeModal, onUpdateUser }){
                 required
             />
             <span 
-                id="jobInput_error"
+                id="aboutInput_error"
                 className='modal__error modal__span'
             > 
             </span>

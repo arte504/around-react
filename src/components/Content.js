@@ -12,7 +12,7 @@ export default function Content({
     onCardLike,
 }) {
     const currentUser = React.useContext(CurrentUserContext);
-
+    
     return(
         <div className='content'>
             <div className='profile'>
@@ -21,10 +21,14 @@ export default function Content({
                         className='profile__image' 
                         src={ currentUser.avatar } 
                         alt="Avatar" />
-                    <div className='profile__image-overlay'>
+                    <div 
+                        className='profile__image-overlay'
+                        onClick={ onEditAvatarClick }
+                    >
                         <button 
                             className='profile__image-edit'
                             type="button"
+                            aria-label="Edit avatar button"
                         ></button>
                     </div>
                 </div>
@@ -35,14 +39,17 @@ export default function Content({
                         <p className='profile__subtitle'>{ currentUser.about }</p>
                     </div>
                     <button 
-                        className='button profile__edit-button' 
+                        className='profile__edit-button' 
                         type="button"
-                        aria-label="Edit button"
+                        aria-label="Edit profile button"
                         onClick={ onEditProfileClick }
                     ></button>
                 </div>
 
-                <button className='button profile__add-button' type="button"></button>
+                <button 
+                    className='profile__add-button' 
+                    type="button"
+                ></button>
             </div>
 
             <div className='cards'>
