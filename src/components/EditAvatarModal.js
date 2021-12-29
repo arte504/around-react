@@ -4,29 +4,29 @@ import ModalWithForm from "./ModalWithForm";
 export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
   const avatarLink = React.useRef();
 
-  function submitHandler(evt) {
+  function handleSubmit(evt) {
     evt.preventDefault();
 
     onUpdateAvatar({
       avatar: avatarLink.current.value,
     });
   }
-
+  
   return (
     <ModalWithForm
       name="avatar"
       title="Change profile picture"
-      buttonTitle="Save"
+      buttonText="Save"
       isOpened={isOpened}
       onClose={onClose}
-      onSubmit={submitHandler}
+      onSubmit={handleSubmit}
     >
       <input
         className="modal__input"
-        id="avatarLinkInput"
+        id="avatar-link"
         type="url"
-        name="avatarLinkInput"
-        placeholder="Image link"
+        name="link"
+        placeholder="Avatar link"
         ref={avatarLink}
         required
       />

@@ -1,7 +1,7 @@
 import React from "react";
 import ModalWithForm from "./ModalWithForm";
 
-export default function AddPlacePopup({isOpened, onClose, onAddPlaceSubmit}) {
+export default function AddCardModal({isOpened, onClose, onAddCardSubmit}) {
   const [cardName, setCardName] = React.useState("");
   const [cardLink, setCardLink] = React.useState("");
 
@@ -17,7 +17,7 @@ export default function AddPlacePopup({isOpened, onClose, onAddPlaceSubmit}) {
     evt.preventDefault();
 
     // Pass the values to the external handler
-    onAddPlaceSubmit({
+    onAddCardSubmit({
         name: cardName,
         link: cardLink
     });
@@ -25,9 +25,9 @@ export default function AddPlacePopup({isOpened, onClose, onAddPlaceSubmit}) {
 
   return (
     <ModalWithForm
-      name="new card"
+      name="new-card"
       title="New place"
-      buttonTitle="Create"
+      buttonText="Create"
       isOpened={isOpened}
       onClose={onClose}
       onSubmit={submitHandler}

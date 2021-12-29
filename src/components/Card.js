@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js'
 export default function Card ({
     card,
     onCardClick,
-    cardLike,
+    onCardLike,
     onCardDelete,
 }) {
     const currentUser = React.useContext(CurrentUserContext);
@@ -14,7 +14,7 @@ export default function Card ({
     }
 
     function handleCardLike() {
-        cardLike(card);
+        onCardLike(card);
     }
 
     function handleDeleteCard() {
@@ -56,11 +56,12 @@ export default function Card ({
                 <h2 className='card__title'>{card.name}</h2>
                 <div className='card__like'>
                     <button 
-                    className={cardLikeButtonClass}
-                    type= "button"
-                    onClick={handleCardLike}
+                        className={cardLikeButtonClass}
+                        type= "button"
+                        aria-label="Card like button"
+                        onClick={handleCardLike}
                     />
-                    <div className='card__like-count'></div>
+                    <div className='card__like-count'>{card.likes.length}</div>
                 </div>
             </div>
        </li>

@@ -8,14 +8,14 @@ export default function Content({
     onEditAvatarClick,
     onDeleteCardClick,
     onCardClick,
-    cards,
     onCardLike,
+    cards
 }) {
     const currentUser = React.useContext(CurrentUserContext);
     
     return(
         <div className='content'>
-            <div className='profile'>
+            <section className='profile'>
                 <div className='profile__avatar'>
                     <img 
                         className='profile__image' 
@@ -49,10 +49,12 @@ export default function Content({
                 <button 
                     className='profile__add-button' 
                     type="button"
+                    aria-label="Add card button"
+                    onClick={ onAddCardClick }
                 ></button>
-            </div>
+            </section>
 
-            <div className='cards'>
+            <section className='cards'>
                 <ul className='cards__grid'>
                     {cards.map((card) => {
                         return (
@@ -66,7 +68,7 @@ export default function Content({
                         )
                     })}
                 </ul>
-            </div>
+            </section>
         </div>
     );
 }

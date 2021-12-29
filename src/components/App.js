@@ -77,6 +77,7 @@ export default function App() {
     api
       .setUserAvatar(newData)
       .then((res) => {
+        console.log(res);
         setCurrentUser({
           name: res.name,
           about: res.about,
@@ -95,7 +96,7 @@ export default function App() {
   function handleEditAvatr() {
     setIsEditAvatarModalOpen(true);
   }
-
+  
   // ===== Cards ===== //
   // --- States for fetching cards from the server //
   const [cards,setCards] = React.useState([]);
@@ -104,10 +105,6 @@ export default function App() {
     name: "",
     link: "",
   });
-  // --- States for card deleting --- //
-  const [deleteCard, deleteCardSeter] = React.useState({
-    _id: ""
-  })
   // --- Card list requset from server --- //
   React.useEffect(() => {
     api
@@ -117,10 +114,39 @@ export default function App() {
       })
       .catch(console.log);
   }, []);
-
+  // --- New card submit handler --- //
+  function handleAddCardSubmit(newData) {
+    api
+      .addCard(newData)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllModals();
+      })
+      .catch(console.log);
+  }
+  // --- Add card modal open handler --- //
   function handleAddCard() {
     setIsAddCardModalOpen(true);
   }
+
+  // ===== Card delete/like ===== //
+  function handleCardLike(card) {
+    // --- Check if card is already liked --- //
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    api
+      .changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((cardsState) =>
+          cardsState.map((item) => (item._id === card._id ? newCard : item))
+        );
+      })
+      .catch(console.log);
+  }
+
+  // --- States for card deleting --- //
+  const [deleteCard, deleteCardSeter] = React.useState({
+    _id: ""
+  });
 
   // ===== DOM ===== //
   return (
@@ -133,7 +159,7 @@ export default function App() {
           onEditAvatarClick={handleEditAvatr}
           onDeleteCardClick
           onCardClick
-          onCardLike
+          onCardLike={handleCardLike}
           cards={cards}
         />
         <Footer/>
@@ -154,7 +180,7 @@ export default function App() {
           <AddCardModal 
             isOpened={isAddCardModalOpen}
             onClose={closeAllModals}
-            onUpdateAvatar={handleUpdateAvatar}
+            onAddCardSubmit={handleAddCardSubmit}
           />
         </section>
       </div>

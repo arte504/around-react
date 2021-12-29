@@ -26,27 +26,26 @@ export default class Api {
       .then(this._response)
   }
   // --- Updating/Editing user profile info --- //
-  setUserInfo(name, about) {
+  setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify(
-        name, 
-        about
-      )
+      body: JSON.stringify({
+        name: data.name, 
+        about: data.about
+      }),
     })
     .then(this._response)
   }
   // --- Adding new card --- //
   addCard(data) {
-    console.log(data);
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
-      body: JSON.stringify(
-        data.titleInput, 
-        data.linkInput
-      )
+      body: JSON.stringify({
+        name: data.name, 
+        link: data.link
+      }),
     })
     .then(this._response)
   }
@@ -74,14 +73,22 @@ export default class Api {
     })
     .then(this._response)
   }
+  // --- Toggle like with the use of like/unlike functions --- //
+  changeLikeCardStatus(cardID, isLiked){
+    if (isLiked){
+      return this.unlikeCard(cardID);
+    } else {
+      return this.likeCard(cardID);
+    }
+  }
   // --- Setting user profile avatar --- //
-  setUserAvatar(avatar) {
+  setUserAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
-      body: JSON.stringify(
-          avatar
-      )
+      body: JSON.stringify({
+          avatar: data.avatar
+      })
     })
     .then(this._response)
   }

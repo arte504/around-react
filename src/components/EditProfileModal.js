@@ -21,12 +21,12 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
         setAbout(currentUser.about);
     }, [currentUser] );
 
-    function submitHandler(evt) {
+    function handleSubmit(evt) {
         evt.preventDefault();
 
         onUpdateUser({
-            name,
-            about
+            name: name,
+            about: about
         });
     }
 
@@ -37,13 +37,13 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
             buttonText="Save"
             isOpened={isOpened}
             onClose={onClose}
-            onSubmit={submitHandler}
+            onSubmit={handleSubmit}
         >
             <input 
                 className='modal__input' 
                 type="text"
-                id="nameInput"
-                name="nameInput"
+                id="name-input"
+                name="name-input"
                 placeholder="Name"
                 value={name}
                 onChange={handleNameUpdate}
@@ -59,8 +59,8 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
             <input
                 className='modal__input'
                 type="text"
-                id="aboutInput" 
-                name="aboutInput" 
+                id="about-input" 
+                name="about-input" 
                 placeholder="About"
                 value={about}
                 onChange={handleAboutUpdate}
