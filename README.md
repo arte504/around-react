@@ -3,8 +3,9 @@
 
 ## Overview
 
-This project is a React redo of my [Around the U.S project](https://github.com/arte504/web_project_4).
-You can view the React one [here](https://arte504.github.io/around-react/).
+- This project is a React redo of my [Around the U.S project](https://github.com/arte504/web_project_4).
+
+- You can view the React one [here](https://arte504.github.io/around-react/).
 
 ## **Intro**
 
