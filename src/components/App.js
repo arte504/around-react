@@ -137,7 +137,7 @@ export default function App() {
       .catch(console.log);
   }
 
-  // --- States for card deleting --- //
+  // --- States for card deleting will be used in the future--- //
   const [deleteCard, deleteCardSeter] = React.useState({
     _id: ""
   });
