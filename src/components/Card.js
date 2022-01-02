@@ -11,17 +11,6 @@ export default function Card ({
         _id: "",
     });
 
-    React.useEffect(() => {
-        api
-          .getUserInfo()
-          .then((res) => {
-            setCurrentUser({
-              _id: res._id,
-            });
-          })
-          .catch(console.log);
-      }, []);
-
     function handleClick() {
         onCardClick(card);
     }

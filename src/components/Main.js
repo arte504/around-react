@@ -24,7 +24,7 @@ export default function Main({
             setUserAvatar(res['avatar']);
         })
         .catch(console.log);
-    });
+    }, []);
 
     return(
         <div className='content'>

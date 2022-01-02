@@ -20,7 +20,6 @@ export default function PopupWithForm(props) {
                     <button
                         className='modal__submit-button'
                         type='submit'
-                        onClick={props.onSubmit}
                     >
                     {props.buttonText}
                     </button>

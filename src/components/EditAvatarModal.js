@@ -7,18 +7,7 @@ export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
 
   const [currentUser, setCurrentUser] = React.useState({
     avatar: "",
-  })
-
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setCurrentUser({
-          avatar: res.avatar,
-        });
-      })
-      .catch(console.log);
-  }, []);
+  });
 
   function handleAvatarUpdate(evt) {
     setAvatar(evt.target.value);

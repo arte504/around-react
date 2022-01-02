@@ -10,18 +10,6 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
         name: "",
         about: "",
     });
-    
-    React.useEffect(() => {
-        api
-          .getUserInfo()
-          .then((res) => {
-            setCurrentUser({
-              name: res.name,
-              about: res.about,
-            });
-          })
-          .catch(console.log);
-      }, []);
 
     function handleNameUpdate(evt) {
         setName(evt.target.value);
