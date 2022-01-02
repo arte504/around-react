@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Content from "./Content";
+import Main from "./Main";
 import api from "../utils/Api";
 import EditProfileModal from "./EditProfileModal";
 import EditAvatarModal from "./EditAvatarModal";
@@ -146,7 +146,7 @@ export default function App() {
   return (
       <div className='page'>
         <Header/>
-        <Content
+        <Main
           onEditProfileClick={handleEditProfile}
           onAddCardClick={handleAddCard}
           onEditAvatarClick={handleEditAvatr}

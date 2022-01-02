@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalWithForm from './ModalWithForm';
+import PopupWithForm from './PopupWithForm';
 import api from "../utils/Api";
 
 export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
@@ -46,7 +46,7 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
     }
 
     return(
-        <ModalWithForm
+        <PopupWithForm
             name="profile"
             title="Edit profile"
             buttonText="Save"

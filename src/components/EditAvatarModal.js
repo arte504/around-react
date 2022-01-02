@@ -1,5 +1,5 @@
 import React from "react";
-import ModalWithForm from "./ModalWithForm";
+import PopupWithForm from "./PopupWithForm";
 import api from "../utils/Api";
 
 export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
@@ -37,7 +37,7 @@ export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
   }
   
   return (
-    <ModalWithForm
+    <PopupWithForm
       name="avatar"
       title="Change profile picture"
       buttonText="Save"

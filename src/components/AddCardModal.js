@@ -1,5 +1,5 @@
 import React from "react";
-import ModalWithForm from "./ModalWithForm";
+import PopupWithForm from "./PopupWithForm";
 
 export default function AddCardModal({isOpened, onClose, onAddCardSubmit}) {
   const [cardName, setCardName] = React.useState("");
@@ -24,7 +24,7 @@ export default function AddCardModal({isOpened, onClose, onAddCardSubmit}) {
   }
 
   return (
-    <ModalWithForm
+    <PopupWithForm
       name="new-card"
       title="New place"
       buttonText="Create"
