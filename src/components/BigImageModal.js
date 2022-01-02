@@ -12,7 +12,7 @@ export default function BigImageModal({ card, onClose }) {
                 <figure className='modal__image'>
                     <img 
                         src={card.link} 
-                        alt="Full size image of the image the user clicked on." 
+                        alt="Full sized card that the user clicked on." 
                         className="modal__big-image"/>
                     <figcaption className='modal__image-caption'>
                         {card.name}

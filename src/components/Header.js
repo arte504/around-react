@@ -5,7 +5,7 @@ export default function Header() {
     return (
       <header className="header">
         <a
-            href="#"
+            href="/"
             target="_self"
             rel="noopener noreferrer"
         >
