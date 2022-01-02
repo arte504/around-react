@@ -1,12 +1,27 @@
 import React from 'react';
 import ModalWithForm from './ModalWithForm';
-import { CurrentUserContext } from '../context/CurrentUserContext.js'
+import api from "../utils/Api";
 
 export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
     const [name, setName] = React.useState("");
     const [about, setAbout] = React.useState("");
 
-    const currentUser = React.useContext(CurrentUserContext);
+    const [currentUser, setCurrentUser] = React.useState({
+        name: "",
+        about: "",
+    });
+    
+    React.useEffect(() => {
+        api
+          .getUserInfo()
+          .then((res) => {
+            setCurrentUser({
+              name: res.name,
+              about: res.about,
+            });
+          })
+          .catch(console.log);
+      }, []);
 
     function handleNameUpdate(evt) {
         setName(evt.target.value);
@@ -19,14 +34,14 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
     React.useEffect(() => {
         setName(currentUser.name);
         setAbout(currentUser.about);
-    }, [currentUser] );
+    }, [currentUser]);
 
     function handleSubmit(evt) {
         evt.preventDefault();
 
         onUpdateUser({
-            name: name,
-            about: about
+            name,
+            about
         });
     }
 

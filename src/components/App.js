@@ -2,37 +2,25 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
-import Api from "./Api"
-import { CurrentUserContext } from '../context/CurrentUserContext.js';
+import api from "../utils/Api";
 import EditProfileModal from "./EditProfileModal";
 import EditAvatarModal from "./EditAvatarModal";
 import AddCardModal from "./AddCardModal"
+import BigImageModal from "./BigImageModal";
 
 export default function App() {
-  // ===== API ===== //
-  // --- Api Config --- //
-  const apiConfig = {
-    baseUrl:"https://around.nomoreparties.co/v1/group-12", 
-    headers:
-    {
-      authorization: "709a0d9d-db06-4890-a594-b07e7309a353",
-      'Content-Type': 'application/json' 
-    }
-  }
-  // --- Create api fetching request --- //
-  const api = new Api(apiConfig);
-
   // ===== Modals ===== //
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = React.useState(false);
 
   const [isEditAvatarModalOpen, setIsEditAvatarModalOpen] = React.useState(false);
 
   const [isAddCardModalOpen, setIsAddCardModalOpen] = React.useState(false);
-  
+  // --- Close modals method --- //
   function closeAllModals() {
     setIsEditProfileModalOpen(false);
     setIsEditAvatarModalOpen(false);
     setIsAddCardModalOpen(false);
+    setSelectedCard({ name: "", link: "" });
   }
 
   // ===== Profile ===== //
@@ -57,7 +45,7 @@ export default function App() {
       })
       .catch(console.log);
   }, []);
-  // --- Updating profile and avatar handlers --- //
+  // --- Updating profile handler --- //
   function handleUpdateUser(newData) {
     api
       .setUserInfo(newData)
@@ -72,12 +60,11 @@ export default function App() {
       })
       .catch(console.log);
   }
-
+  // --- Updating avatar handler --- //
   function handleUpdateAvatar(newData) {
     api
       .setUserAvatar(newData)
       .then((res) => {
-        console.log(res);
         setCurrentUser({
           name: res.name,
           about: res.about,
@@ -88,11 +75,11 @@ export default function App() {
       })
       .catch(console.log);
   }
-  // --- Edit profile and avatar buttons handlers --- //
+  // --- Edit profile button handler --- //
   function handleEditProfile() {
     setIsEditProfileModalOpen(true);
   }
-
+  // --- Edit avatar button handler --- //
   function handleEditAvatr() {
     setIsEditAvatarModalOpen(true);
   }
@@ -105,6 +92,13 @@ export default function App() {
     name: "",
     link: "",
   });
+  // --- Handle big image open --- //
+  function handleOnCardClick(card) {
+    setSelectedCard({
+      name: card.name,
+      link: card.link,
+    })
+  }
   // --- Card list requset from server --- //
   React.useEffect(() => {
     api
@@ -150,7 +144,6 @@ export default function App() {
 
   // ===== DOM ===== //
   return (
-    <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Header/>
         <Content
@@ -158,7 +151,7 @@ export default function App() {
           onAddCardClick={handleAddCard}
           onEditAvatarClick={handleEditAvatr}
           onDeleteCardClick
-          onCardClick
+          onCardClick={handleOnCardClick}
           onCardLike={handleCardLike}
           cards={cards}
         />
@@ -177,6 +170,11 @@ export default function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
+          <BigImageModal 
+            card={selectedCard}
+            onClose={closeAllModals}
+          />
+
           <AddCardModal 
             isOpened={isAddCardModalOpen}
             onClose={closeAllModals}
@@ -184,6 +182,5 @@ export default function App() {
           />
         </section>
       </div>
-    </CurrentUserContext.Provider>
   );
 }

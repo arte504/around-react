@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./Card"
-import { CurrentUserContext } from "../context/CurrentUserContext";
+import Card from "./Card";
+import api from "../utils/Api";
 
 export default function Content({
     onEditProfileClick,
@@ -11,15 +11,28 @@ export default function Content({
     onCardLike,
     cards
 }) {
-    const currentUser = React.useContext(CurrentUserContext);
-    
+    const [userName, setUserName] = React.useState('');
+    const [userAbout, setUserAbout] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState('');
+
+    React.useEffect(() => {
+    api
+        .getUserInfo()
+        .then((res) => {
+            setUserName(res['name']);
+            setUserAbout(res['about']);
+            setUserAvatar(res['avatar']);
+        })
+        .catch(console.log);
+    });
+
     return(
         <div className='content'>
             <section className='profile'>
                 <div className='profile__avatar'>
                     <img 
                         className='profile__image' 
-                        src={ currentUser.avatar } 
+                        src={ userAvatar } 
                         alt="Avatar" />
                     <div 
                         className='profile__image-overlay'
@@ -35,8 +48,8 @@ export default function Content({
 
                 <div className='profile__info'>
                     <div className='profile__text'>
-                        <h1 className='profile__title'>{ currentUser.name }</h1>
-                        <p className='profile__subtitle'>{ currentUser.about }</p>
+                        <h1 className='profile__title'>{ userName }</h1>
+                        <p className='profile__subtitle'>{ userAbout }</p>
                     </div>
                     <button 
                         className='profile__edit-button' 

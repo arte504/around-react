@@ -20,6 +20,7 @@ export default function ModalWithForm(props) {
                     <button
                         className='modal__submit-button'
                         type='submit'
+                        onClick={props.onSubmit}
                     >
                     {props.buttonText}
                     </button>

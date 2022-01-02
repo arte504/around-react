@@ -1,5 +1,5 @@
 import React from "react";
-import { CurrentUserContext } from '../context/CurrentUserContext.js'
+import api from "../utils/Api";
 
 export default function Card ({
     card,
@@ -7,7 +7,20 @@ export default function Card ({
     onCardLike,
     onCardDelete,
 }) {
-    const currentUser = React.useContext(CurrentUserContext);
+    const [currentUser, setCurrentUser] = React.useState({
+        _id: "",
+    });
+
+    React.useEffect(() => {
+        api
+          .getUserInfo()
+          .then((res) => {
+            setCurrentUser({
+              _id: res._id,
+            });
+          })
+          .catch(console.log);
+      }, []);
 
     function handleClick() {
         onCardClick(card);
