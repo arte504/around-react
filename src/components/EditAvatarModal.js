@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import api from "../utils/Api";
 
 export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
   const [avatar, setAvatar] = React.useState("");

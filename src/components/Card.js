@@ -1,5 +1,4 @@
 import React from "react";
-import api from "../utils/Api";
 
 export default function Card ({
     card,

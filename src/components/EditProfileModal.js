@@ -1,6 +1,5 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import api from "../utils/Api";
 
 export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
     const [name, setName] = React.useState("");
