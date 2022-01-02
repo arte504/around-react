@@ -58,6 +58,6 @@ export default function EditAvatarModal({ isOpened, onClose, onUpdateAvatar }) {
         id="avatarLinkInput_error"
         className='modal__error modal__span'  
       ></span>
-    </ModalWithForm>
+    </PopupWithForm>
   );
 }

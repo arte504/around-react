@@ -88,6 +88,6 @@ export default function EditProfileModal({ isOpened, onClose, onUpdateUser }){
                 className='modal__error modal__span'
             > 
             </span>
-        </ModalWithForm>
+        </PopupWithForm>
     );
 }

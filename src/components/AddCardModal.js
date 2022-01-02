@@ -56,6 +56,6 @@ export default function AddCardModal({isOpened, onClose, onAddCardSubmit}) {
         required
       />
       <span id="link-input-error"></span>
-    </ModalWithForm>
+    </PopupWithForm>
   );
 }
