@@ -6,7 +6,7 @@ import api from "../utils/Api";
 import EditProfileModal from "./EditProfileModal";
 import EditAvatarModal from "./EditAvatarModal";
 import AddCardModal from "./AddCardModal"
-import BigImageModal from "./BigImageModal";
+import ImagePopup from "./ImagePopup";
 
 export default function App() {
   // ===== Modals ===== //
@@ -170,7 +170,7 @@ export default function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
-          <BigImageModal 
+          <ImagePopup 
             card={selectedCard}
             onClose={closeAllModals}
           />

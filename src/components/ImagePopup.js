@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function BigImageModal({ card, onClose }) {
+export default function ImagePopup({ card, onClose }) {
     return(
         <div className={`modal modal_type_big-image ${card.name ? 'modal_visible' : ''}`}>
             <div className='modal__container modal__container_type_big-image'>

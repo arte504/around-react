@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import api from "../utils/Api";
 
-export default function Content({
+export default function Main({
     onEditProfileClick,
     onAddCardClick,
     onEditAvatarClick,
